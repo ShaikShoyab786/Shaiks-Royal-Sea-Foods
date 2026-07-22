@@ -27,6 +27,7 @@ export default function ExecutiveLoginPage() {
   const { setAuth } = useAuthStore();
   const [step, setStep] = useState<'phone' | 'otp'>('phone');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [demoOtp, setDemoOtp] = useState('');
 
   const sendOtpMutation = useSendOtp();
   const verifyOtpMutation = useVerifyOtp();
@@ -48,8 +49,12 @@ export default function ExecutiveLoginPage() {
       {
         onSuccess: (res) => {
           setPhoneNumber(values.phone);
+          const match = res.message?.match(/Demo OTP:\s*(\d{6})/);
+          const otp = match?.[1] ?? '';
+          setDemoOtp(otp);
+          if (otp) otpForm.setValue('otp', otp);
           setStep('otp');
-          toast.success(res.message || 'OTP sent successfully');
+          toast.success(res.message || 'OTP sent successfully', { duration: 10000 });
         },
         onError: (err: any) => toast.error(err?.error || 'Failed to send OTP'),
       }
@@ -92,6 +97,14 @@ export default function ExecutiveLoginPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          {/* Demo OTP banner */}
+          {step === 'otp' && demoOtp && (
+            <div className="mb-6 flex items-center gap-3 rounded-xl border border-primary/40 bg-primary/10 px-4 py-3">
+              <span className="text-sm text-muted-foreground shrink-0">Demo OTP:</span>
+              <span className="font-mono text-2xl font-bold tracking-[0.25em] text-primary">{demoOtp}</span>
+            </div>
+          )}
+
           {step === 'phone' ? (
             <Form {...phoneForm}>
               <form onSubmit={phoneForm.handleSubmit(onPhoneSubmit)} className="space-y-6">
