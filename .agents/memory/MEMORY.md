@@ -1,0 +1,1 @@
+- [Shaiks Royal Sea Foods — project overview](shaiks-project.md) — full-stack frozen seafood delivery app, 3 portals, navy/gold theme

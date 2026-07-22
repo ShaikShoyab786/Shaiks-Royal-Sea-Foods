@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Shaik's Royal Sea Foods"
+version = "1.0.0"
+id = "artifacts/shaiks-royal-seafoods"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18782
+
+[services.development]
+run = "pnpm --filter @workspace/shaiks-royal-seafoods run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/shaiks-royal-seafoods", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/shaiks-royal-seafoods/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18782"
+BASE_PATH = "/"
