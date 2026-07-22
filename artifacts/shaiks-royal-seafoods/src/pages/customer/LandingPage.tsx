@@ -13,12 +13,12 @@ export default function LandingPage() {
       <section className="relative w-full h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="/attached_assets/generated_images/hero.jpg" 
+            src="/images/hero.jpg" 
             alt="Luxury Seafood Platter" 
             className="w-full h-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+
         </div>
         
         <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,7 +100,7 @@ export default function LandingPage() {
             <Link href="/products" className="group block">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-border/50 bg-card group-hover:border-primary/50 transition-colors duration-500">
                 <img 
-                  src="/attached_assets/generated_images/prawns.jpg" 
+                  src="/images/white-prawns.jpg" 
                   alt="Premium Frozen Prawns" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -116,7 +116,7 @@ export default function LandingPage() {
             <Link href="/products" className="group block">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-border/50 bg-card group-hover:border-primary/50 transition-colors duration-500">
                 <img 
-                  src="/attached_assets/generated_images/apollo-fish.jpg" 
+                  src="/images/apollo-fish.jpg" 
                   alt="Premium Apollo Fish Steak" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
