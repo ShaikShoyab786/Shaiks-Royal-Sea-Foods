@@ -8,7 +8,8 @@ import {
   Clock, 
   BarChart3, 
   LogOut,
-  ShoppingBag
+  ShoppingBag,
+  Settings
 } from 'lucide-react';
 import { UserRole } from '@workspace/api-client-react';
 
@@ -23,6 +24,7 @@ export function AdminSidebar() {
     { href: '/admin/executives', label: 'Executives', icon: Users },
     { href: '/admin/timeslots', label: 'Time Slots', icon: Clock },
     { href: '/admin/reports', label: 'Reports', icon: BarChart3 },
+    { href: '/admin/settings', label: 'Settings', icon: Settings },
   ];
 
   return (

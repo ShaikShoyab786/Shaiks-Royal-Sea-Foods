@@ -23,6 +23,7 @@ import AdminProductsPage from '@/pages/admin/AdminProductsPage';
 import AdminExecutivesPage from '@/pages/admin/AdminExecutivesPage';
 import AdminTimeslotsPage from '@/pages/admin/AdminTimeslotsPage';
 import AdminReportsPage from '@/pages/admin/AdminReportsPage';
+import AdminSettingsPage from '@/pages/admin/AdminSettingsPage';
 
 // Executive
 import ExecutiveLoginPage from '@/pages/executive/ExecutiveLoginPage';
@@ -54,6 +55,7 @@ function Router() {
       <Route path="/admin/executives" component={AdminExecutivesPage} />
       <Route path="/admin/timeslots" component={AdminTimeslotsPage} />
       <Route path="/admin/reports" component={AdminReportsPage} />
+      <Route path="/admin/settings" component={AdminSettingsPage} />
 
       {/* Executive Routes */}
       <Route path="/executive/login" component={ExecutiveLoginPage} />

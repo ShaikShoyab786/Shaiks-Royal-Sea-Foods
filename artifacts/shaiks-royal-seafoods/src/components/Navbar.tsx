@@ -17,18 +17,17 @@ export function Navbar() {
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-3 group">
-              <img 
-                src="https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/anchor.svg" 
-                alt="Logo" 
-                className="h-10 w-10 text-primary drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] group-hover:scale-105 transition-transform duration-300"
-                style={{ filter: 'invert(75%) sepia(50%) saturate(600%) hue-rotate(5deg) brightness(95%) contrast(85%)' }}
+              <img
+                src="/images/logo.png"
+                alt="Shaik's Royal Sea Foods"
+                className="h-12 w-12 object-contain group-hover:scale-105 transition-transform duration-300"
               />
               <span className="font-serif text-2xl font-bold tracking-tight text-foreground hidden sm:block">
                 Shaik's <span className="text-primary italic">Royal</span> Sea Foods
               </span>
             </Link>
           </div>
-          
+
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-8">
               <Link href="/products" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
@@ -50,7 +49,7 @@ export function Navbar() {
                   <UserIcon className="h-4 w-4" />
                   My Orders
                 </Link>
-                <button 
+                <button
                   onClick={logout}
                   className="text-sm font-medium text-muted-foreground hover:text-destructive transition-colors"
                 >
@@ -62,7 +61,7 @@ export function Navbar() {
                 Sign In
               </Link>
             )}
-            
+
             <Link href="/cart" className="relative p-2 text-foreground hover:text-primary transition-colors">
               <ShoppingBag className="h-6 w-6" />
               {cartCount > 0 && (
@@ -104,7 +103,7 @@ export function Navbar() {
                 <Link href="/orders" className="block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-muted hover:text-primary">
                   My Orders
                 </Link>
-                <button 
+                <button
                   onClick={() => { logout(); setIsOpen(false); }}
                   className="block w-full text-left rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-muted hover:text-destructive"
                 >

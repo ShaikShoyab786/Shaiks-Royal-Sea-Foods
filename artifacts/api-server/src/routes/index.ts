@@ -6,6 +6,7 @@ import timeslotsRouter from "./timeslots";
 import ordersRouter from "./orders";
 import executivesRouter from "./executives";
 import reportsRouter from "./reports";
+import uploadRouter from "./upload";
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use(timeslotsRouter);
 router.use(ordersRouter);
 router.use(executivesRouter);
 router.use(reportsRouter);
+router.use(uploadRouter);
 
 export default router;
