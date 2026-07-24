@@ -187,3 +187,40 @@
     pointer-events: none;
   }
 }
+
+/* ── Royal Standard — luxury shine sweep (every ~9s) ─────────────────── */
+@keyframes luxury-shine {
+  0%   { transform: translateX(-200%) skewX(-18deg); opacity: 0; }
+  4%   { opacity: 1; }
+  20%  { transform: translateX(220%) skewX(-18deg); opacity: 0; }
+  100% { transform: translateX(220%) skewX(-18deg); opacity: 0; }
+}
+
+.quality-card-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.quality-card-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 45%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.09) 50%,
+    transparent 100%
+  );
+  animation: luxury-shine 9s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 20;
+  border-radius: inherit;
+}
+
+/* ── Floating particle drift ─────────────────────────────────────────── */
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-22px) scale(1.06); }
+}
+

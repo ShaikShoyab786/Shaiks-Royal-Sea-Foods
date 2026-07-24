@@ -5,6 +5,7 @@ import { ArrowRight, ShieldCheck, Snowflake, Truck, Droplets, Star, Package } fr
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useListProducts } from '@workspace/api-client-react';
+import { RoyalStandardSection } from '@/components/RoyalStandardSection';
 
 export default function LandingPage() {
   const { data: products } = useListProducts();
@@ -175,32 +176,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── ROYAL STANDARD ── */}
-      <section id="quality" className="py-20 border-y border-border/50 bg-card/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">The Royal Standard</h2>
-            <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-            {[
-              { icon: ShieldCheck, title: 'Export Quality',        desc: 'Sourced from the finest catch, meeting strict export standards.' },
-              { icon: Droplets,   title: 'Hygienically Cleaned',   desc: 'Prepared in sterile environments, ready to cook instantly.' },
-              { icon: Snowflake,  title: 'Flash Frozen -18°C',     desc: 'Locked-in freshness and nutrients using advanced freezing technology.' },
-              { icon: Truck,      title: 'Temperature Controlled', desc: 'Delivered in insulated boxes to ensure zero thawing.' },
-            ].map((f, i) => (
-              <div key={i} className="flex flex-col items-center text-center group">
-                <div className="h-20 w-20 rounded-full border-2 border-primary/20 flex items-center justify-center bg-card mb-6 group-hover:border-primary group-hover:scale-110 transition-all duration-300 shadow-lg">
-                  <f.icon className="h-10 w-10 text-primary" strokeWidth={1.5} />
-                </div>
-                <h3 className="font-serif text-xl font-semibold mb-2">{f.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── ROYAL STANDARD — premium interactive section ── */}
+      <RoyalStandardSection />
 
       {/* ── HOW IT WORKS ── */}
       <section id="how-it-works" className="py-24 bg-card/50 border-b border-border/50">

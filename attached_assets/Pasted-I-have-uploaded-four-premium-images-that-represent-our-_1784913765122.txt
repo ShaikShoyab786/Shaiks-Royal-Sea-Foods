@@ -1,0 +1,210 @@
+I have uploaded four premium images that represent our quality standards.
+
+Replace the current simple icon section ("The Royal Standard") with these four uploaded images.
+
+Do NOT redesign the entire page.
+
+Keep the existing luxury black and gold branding.
+
+Section Title
+
+Keep:
+
+The Royal Standard
+
+Below it add a small premium subtitle.
+
+"Every order is handled with uncompromising quality, hygiene and care."
+
+Layout
+
+Desktop
+
+Display four premium cards in one row.
+
+Mobile
+
+Display one card per row.
+
+Tablet
+
+Display two cards per row.
+
+Spacing should be balanced.
+
+Card Design
+
+Each card should have
+
+Rounded corners
+Glassmorphism background
+Luxury shadow
+Thin gold border
+Hover glow
+Premium spacing
+Images
+
+Use the four uploaded images.
+
+Crop intelligently.
+
+Maintain full quality.
+
+Each image should have:
+
+Rounded corners
+Slight zoom on hover
+Premium shadow
+Smooth transition
+
+Do not stretch images.
+
+Animation
+
+As the user scrolls,
+
+animate each card individually.
+
+Animation:
+
+Fade In
+
+Move Up
+
+Scale
+
+Duration
+
+700ms
+
+Delay
+
+150ms
+
+Card 1
+
+↓
+
+Card 2
+
+↓
+
+Card 3
+
+↓
+
+Card 4
+
+The animation should only happen once when entering the viewport.
+
+Hover Effects
+
+On hover
+
+Image zoom
+
+1.05 scale
+
+Card lifts upward
+
+8px
+
+Gold border glows
+
+Shadow becomes stronger
+
+Cursor changes
+
+Smooth transition
+
+300ms
+
+Interactive Mouse Effect
+
+Very subtle mouse parallax.
+
+Image moves slightly with cursor.
+
+Maximum movement:
+
+5px
+
+Do not overdo it.
+
+Keep elegant.
+
+Floating Background
+
+Behind this section,
+
+add extremely subtle
+
+floating golden particles
+
+blurred lights
+
+and soft glow effects.
+
+No distracting animation.
+
+Luxury only.
+
+Text
+
+Below every image
+
+show title
+
+and description.
+
+1
+
+Export Quality
+
+Sourced from the finest catch and carefully selected to meet premium quality standards.
+
+2
+
+Hygienically Cleaned
+
+Professionally cleaned in a hygienic environment using safe food handling practices.
+
+3
+
+Flash Frozen –18°C
+
+Instantly frozen at –18°C to lock freshness, taste and nutritional value.
+
+4
+
+Temperature Controlled
+
+Maintained under strict cold-chain conditions from our facility to your doorstep.
+
+Scroll Experience
+
+Cards should smoothly appear while scrolling.
+
+No sudden animation.
+
+Everything should feel premium.
+
+Performance
+
+Optimize image loading.
+
+Lazy load images.
+
+Keep animation smooth.
+
+Avoid layout shift.
+
+Overall Goal
+
+This section should feel similar to premium brands like Apple, Rolex or luxury food companies.
+
+The objective is to increase customer trust by visually communicating our quality standards using cinematic imagery, elegant animations and smooth interactions.
+
+Do not change any other section of the website.
+
+Only upgrade "The Royal Standard" section while preserving the current design language.
