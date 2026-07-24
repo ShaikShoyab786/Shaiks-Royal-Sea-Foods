@@ -1,0 +1,329 @@
+IMPORTANT
+
+Do NOT rewrite or redesign the entire application.
+
+Keep the current architecture, routing, authentication, backend, database, APIs and styling intact.
+
+Only implement the requested improvements while maintaining the existing premium black & gold theme, responsiveness and functionality.
+
+1. Hero Section Improvements
+
+The hero section currently has excessive empty space on the left side and top-left corner.
+
+Please:
+
+Reduce the unnecessary padding and margins.
+Align the hero content properly.
+Move the text slightly upwards.
+Utilize the available space efficiently.
+Make the hero section balanced on desktop and mobile.
+Maintain premium spacing without looking empty.
+2. Professional Logo
+
+The current logo appears like a simple rectangular image.
+
+Convert it into a premium brand logo.
+
+Requirements:
+
+Circular logo container
+Transparent background
+Soft shadow
+Thin golden circular border
+Proper spacing from website title
+Retina quality
+Perfect alignment inside navbar
+Looks like a luxury seafood brand instead of an uploaded image.
+3. Our Products Section
+
+Currently the product titles blend into the background.
+
+Please:
+
+Change product title color to premium gold (#D4AF37)
+Increase readability
+Improve contrast
+Slightly increase font weight
+4. Homepage Product Cards
+
+Currently users can order from both:
+
+Homepage
+Products page
+
+This creates duplicate purchase flow.
+
+Instead:
+
+Homepage product cards should become preview cards.
+
+Remove:
+
+Add to Cart button
+
+Keep:
+
+Product Image
+Product Name
+Price
+Short Description
+
+When user clicks anywhere on the product card,
+
+redirect them to
+
+/products
+
+where actual ordering happens.
+
+Homepage should inspire browsing.
+
+Products page should handle purchasing.
+
+5. Better Cart Experience
+
+Currently user adds products but only sees
+
+"1"
+
+or
+
+"2"
+
+inside the cart icon.
+
+This is not intuitive.
+
+After adding product,
+
+show a modern floating notification (toast)
+
+Example:
+
+✅ White Prawns added to cart.
+
+Below it display two buttons.
+
+Green Button
+
+Proceed to Checkout
+
+Secondary Button
+
+Continue Shopping
+
+Proceed button should directly navigate to checkout.
+
+Continue Shopping should close popup.
+
+Do not remove the cart counter.
+
+Keep both.
+
+6. Checkout Page Buttons
+
+Currently checkout only provides
+
+Proceed to Checkout
+
+Also add
+
+Continue Shopping
+
+button
+
+which redirects back to products page.
+
+Layout:
+
+Continue Shopping (secondary)
+
+Proceed to Payment (primary)
+
+This improves user experience.
+
+7. Delivery Location Improvements
+
+Currently customer can only use
+
+Current Location.
+
+Improve this.
+
+Allow customer to:
+
+✔ Use Current Location
+
+OR
+
+✔ Drag marker on interactive map
+
+OR
+
+✔ Search location manually
+
+Map marker should be editable.
+
+Selected location should automatically update delivery coordinates.
+
+8. Mobile Number
+
+During checkout,
+
+add mandatory
+
+Mobile Number
+
+field.
+
+Validation:
+
+Indian mobile only
+10 digits
+Required
+
+Field executive will directly call customer before delivery.
+
+9. Delivery Time Validation
+
+Current bug:
+
+User can still choose
+
+Today
+
+Morning
+
+7AM–11AM
+
+even if that time has already passed.
+
+This should behave realistically.
+
+Implement proper validation.
+
+Example:
+
+Current time:
+
+12:45 PM
+
+Then
+
+Morning Slot
+
+should either:
+
+be disabled
+
+OR
+
+show
+
+"Unavailable"
+
+If user tries selecting expired slot,
+
+display
+
+"This delivery slot has already passed. Please select another available time."
+
+Apply same validation for all future slots.
+
+10. Order Cancellation
+
+Inside
+
+My Orders
+
+add
+
+Cancel Order
+
+button.
+
+When clicked,
+
+show confirmation dialog.
+
+Reason for cancellation.
+
+Dropdown options:
+
+Changed my mind
+
+Ordered by mistake
+
+Found better price
+
+Delivery taking too long
+
+Need different product
+
+Other
+
+If
+
+Other
+
+selected,
+
+show textarea.
+
+11. Refund Note
+
+If payment was Online,
+
+show message.
+
+Example:
+
+"If your payment has already been processed, the refunded amount will be credited back to your original payment method within 24 hours."
+
+Make it elegant.
+
+12. Cancellation Window
+
+Very important.
+
+Customer should only cancel before preparation begins.
+
+Logic:
+
+If delivery slot has NOT started,
+
+Cancel button remains active.
+
+If delivery slot has already started,
+
+Disable cancel button.
+
+Instead display:
+
+"Sorry, this order can no longer be cancelled because preparation for your delivery has already begun."
+
+Grey out button.
+
+Show lock icon.
+
+Professional UI.
+
+13. Improve Overall UX
+
+Without changing the design,
+
+improve:
+
+Better spacing
+Better hover animations
+Better transitions
+Better button feedback
+Better loading states
+Better responsive behavior
+Better typography alignment
+
+Maintain premium luxury seafood branding.
+
+Do not break any existing functionality.
+
+Preserve the current architecture and only improve the experience.

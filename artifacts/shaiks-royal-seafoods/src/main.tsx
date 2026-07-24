@@ -4,6 +4,7 @@ import { setAuthTokenGetter } from '@workspace/api-client-react';
 import App from './App';
 
 import './index.css';
+import 'leaflet/dist/leaflet.css';
 
 // Inject JWT from localStorage into every API request
 setAuthTokenGetter(() => localStorage.getItem('auth_token'));

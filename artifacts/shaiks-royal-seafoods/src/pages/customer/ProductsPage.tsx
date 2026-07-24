@@ -6,9 +6,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Plus, Minus, ShoppingBag, Info } from 'lucide-react';
-import { toast } from 'sonner';
+import { showCartToast } from '@/components/CartToast';
+import { useLocation } from 'wouter';
 
 export default function ProductsPage() {
+  const [, navigate] = useLocation();
   const { data: products, isLoading } = useListProducts();
   const { items, addItem, removeItem, updateQuantity } = useCartStore();
 
@@ -18,7 +20,7 @@ export default function ProductsPage() {
 
   const handleAdd = (product: any) => {
     addItem(product, 1);
-    toast.success(`${product.name} added to cart`);
+    showCartToast({ productName: product.name, navigate });
   };
 
   const handleIncrement = (product: any) => {
@@ -40,7 +42,7 @@ export default function ProductsPage() {
       <Navbar />
       
       {/* Header */}
-      <div className="bg-card/50 border-b border-border/50 py-16">
+      <div className="bg-card/50 border-b border-border/50 py-14">
         <div className="container mx-auto px-4 text-center">
           <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">Premium Selection</h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -75,13 +77,13 @@ export default function ProductsPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {products?.filter(p => p.inStock).map((product) => (
-              <Card key={product.id} className="bg-card border-primary/20 overflow-hidden flex flex-col group hover:border-primary/50 transition-colors duration-500 shadow-xl">
+              <Card key={product.id} className="bg-card border-primary/20 overflow-hidden flex flex-col group hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-[0_8px_40px_rgba(212,175,55,0.12)] hover:-translate-y-0.5">
                 <div className="relative aspect-square overflow-hidden bg-background">
                   {product.imageUrl ? (
                     <img 
                       src={product.imageUrl} 
                       alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-secondary/50">
@@ -93,7 +95,7 @@ export default function ProductsPage() {
                       {product.category}
                     </span>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
                 
                 <CardContent className="p-6 flex-1 flex flex-col">
@@ -105,7 +107,7 @@ export default function ProductsPage() {
                   </p>
                   
                   <div className="flex items-center gap-2 text-xs text-muted-foreground mb-6 p-3 bg-background/50 rounded-lg border border-border/50">
-                    <Info className="h-4 w-4 text-primary" />
+                    <Info className="h-4 w-4 text-primary shrink-0" />
                     <span>Pack size: 1 KG (Net weight after cleaning)</span>
                   </div>
                 </CardContent>
@@ -121,7 +123,7 @@ export default function ProductsPage() {
                       <Button 
                         variant="ghost" 
                         size="icon" 
-                        className="h-8 w-8 rounded-full text-foreground hover:text-primary hover:bg-primary/10"
+                        className="h-8 w-8 rounded-full text-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-150"
                         onClick={() => handleDecrement(product)}
                       >
                         <Minus className="h-4 w-4" />
@@ -130,7 +132,7 @@ export default function ProductsPage() {
                       <Button 
                         variant="ghost" 
                         size="icon" 
-                        className="h-8 w-8 rounded-full text-foreground hover:text-primary hover:bg-primary/10"
+                        className="h-8 w-8 rounded-full text-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-150"
                         onClick={() => handleIncrement(product)}
                       >
                         <Plus className="h-4 w-4" />
@@ -138,7 +140,7 @@ export default function ProductsPage() {
                     </div>
                   ) : (
                     <Button 
-                      className="rounded-full px-6 shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-shadow"
+                      className="rounded-full px-6 shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200"
                       onClick={() => handleAdd(product)}
                     >
                       Add to Cart
