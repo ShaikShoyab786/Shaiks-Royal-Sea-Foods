@@ -1,0 +1,357 @@
+IMPORTANT
+
+I have uploaded three new premium images that represent the customer ordering journey.
+
+Replace the current "The Journey to Your Table" section with these uploaded images.
+
+Do NOT redesign the whole website.
+
+Maintain the existing premium black, navy and gold luxury theme.
+
+Keep the current responsive layout.
+
+Objective
+
+The goal is to make this section feel modern, interactive and premium like Apple, Mercedes-Benz or Rolex websites.
+
+Customers should immediately understand our ordering process within a few seconds.
+
+This section should tell a story rather than simply displaying text.
+
+Replace Existing Numbers
+
+Instead of showing only
+
+01
+
+02
+
+03
+
+Use the uploaded premium artwork for each step.
+
+The uploaded images already contain the step number.
+
+Do not overlay another number.
+
+Step 1
+
+Display uploaded image
+
+Select Your Catch
+
+Description:
+
+Browse our premium seafood collection including White Prawns, Apollo Fish and other carefully selected products.
+
+Step 2
+
+Display uploaded image
+
+Choose Delivery Slot
+
+Description:
+
+Choose your preferred delivery date, delivery time and delivery location before confirming your order.
+
+Step 3
+
+Display uploaded image
+
+Royal Delivery
+
+Description:
+
+Our delivery executive safely delivers your seafood in a temperature-controlled insulated box to maintain maximum freshness.
+
+Image Cards
+
+Each uploaded image should become a premium card.
+
+Requirements:
+
+Rounded corners
+
+Luxury shadow
+
+Thin gold border
+
+Glassmorphism effect
+
+Balanced spacing
+
+Perfect alignment
+
+Responsive
+
+Do NOT crop important parts of images.
+
+Maintain full quality.
+
+Hover Animation
+
+When hovering a card
+
+Card moves upward
+
+Image zooms slightly
+
+Gold border glows
+
+Shadow becomes deeper
+
+Transition
+
+300ms
+
+Elegant only.
+
+Scroll Animation
+
+As user scrolls into this section
+
+Cards should animate one after another.
+
+Animation:
+
+Fade In
+
+Move Up
+
+Scale
+
+Duration
+
+700ms
+
+Delay
+
+150ms between each card
+
+Only play once.
+
+Animated Journey Line
+
+Replace the static connecting line.
+
+Create a premium animated gold line.
+
+Animation:
+
+A glowing gold light travels from
+
+Step 1
+
+↓
+
+Step 2
+
+↓
+
+Step 3
+
+Every
+
+6–8 seconds
+
+It should look like energy flowing through the customer journey.
+
+Smooth and elegant.
+
+Active Progress
+
+As the user scrolls,
+
+highlight each step.
+
+Example
+
+Step 1 lights up
+
+↓
+
+gold line animates
+
+↓
+
+Step 2 lights up
+
+↓
+
+gold line animates
+
+↓
+
+Step 3 lights up
+
+Creates storytelling.
+
+Floating Effects
+
+Behind this section,
+
+add
+
+very subtle
+
+gold particles
+
+soft glow
+
+blurred light effects
+
+Keep opacity very low.
+
+Luxury feeling only.
+
+Mouse Parallax
+
+As user moves mouse,
+
+images should move slightly.
+
+Maximum movement
+
+5px
+
+Very subtle.
+
+Section Entrance
+
+Entire section should
+
+fade in
+
+move upward
+
+smoothly
+
+No sudden animation.
+
+Mobile Layout
+
+Desktop
+
+3 cards in one row.
+
+Tablet
+
+2 cards
+
+1 card
+
+Mobile
+
+Single column
+
+Maintain spacing.
+
+No horizontal scrolling.
+
+Premium Divider
+
+Below title
+
+"The Journey to Your Table"
+
+Replace simple line
+
+with an elegant royal gold divider.
+
+Completion Effect
+
+Once all three cards have appeared,
+
+display a premium success message.
+
+Example:
+
+Fresh from the Sea to Your Door
+
+with a subtle gold fade animation.
+
+Optional Interactive Feature
+
+When user clicks any step,
+
+open a premium modal popup.
+
+The popup should contain:
+
+Large version of uploaded image
+
+Detailed explanation
+
+Close button
+
+Blur background
+
+Smooth fade animation
+
+Premium Story Timeline
+
+Below the three cards,
+
+add a horizontal premium timeline.
+
+Sea
+
+↓
+
+Quality Inspection
+
+↓
+
+Professional Cleaning
+
+↓
+
+Flash Frozen (-18°C)
+
+↓
+
+Temperature Controlled Storage
+
+↓
+
+Royal Delivery
+
+↓
+
+Your Doorstep
+
+Each step should have a premium icon.
+
+Animate the timeline while scrolling.
+
+Performance
+
+Lazy load images
+
+Optimize image rendering
+
+Maintain 60fps animations
+
+No layout shifts
+
+Do not impact page speed.
+
+Overall Goal
+
+This section should feel like a premium luxury brand experience.
+
+The customer should instantly understand:
+
+Browse Products
+
+↓
+
+Choose Delivery Slot
+
+↓
+
+Receive Fresh Seafood
+
+Everything should feel smooth, luxurious, modern and trustworthy.
+
+Maintain the existing black and gold branding throughout.

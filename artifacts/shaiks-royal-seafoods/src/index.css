@@ -224,3 +224,56 @@
   50%       { transform: translateY(-22px) scale(1.06); }
 }
 
+/* ── Journey connector — gold light traveling along the line ──────────── */
+@keyframes connector-shimmer-h {
+  0%   { background-position: -200% center; }
+  100% { background-position: 300% center; }
+}
+
+@keyframes connector-shimmer-v {
+  0%   { background-position: center -200%; }
+  100% { background-position: center 300%; }
+}
+
+.journey-connector-h {
+  background: linear-gradient(
+    90deg,
+    rgba(212,175,55,0.20) 0%,
+    rgba(212,175,55,0.20) 30%,
+    rgba(212,175,55,1.00) 50%,
+    rgba(212,175,55,0.20) 70%,
+    rgba(212,175,55,0.20) 100%
+  );
+  background-size: 300% 100%;
+  animation: connector-shimmer-h 7s ease-in-out infinite;
+}
+.journey-connector-h-d { animation-delay: 1.3s; }
+
+.journey-connector-v {
+  background: linear-gradient(
+    180deg,
+    rgba(212,175,55,0.20) 0%,
+    rgba(212,175,55,0.20) 30%,
+    rgba(212,175,55,1.00) 50%,
+    rgba(212,175,55,0.20) 70%,
+    rgba(212,175,55,0.20) 100%
+  );
+  background-size: 100% 300%;
+  animation: connector-shimmer-v 7s ease-in-out infinite;
+}
+.journey-connector-v-d { animation-delay: 1.3s; }
+
+/* ── Completion reveal ───────────────────────────────────────────────── */
+@keyframes completion-reveal {
+  0%   { opacity: 0; transform: translateY(10px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.journey-completion { animation: completion-reveal 0.9s ease forwards; }
+
+/* ── Timeline item reveal ────────────────────────────────────────────── */
+@keyframes timeline-item-in {
+  0%   { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+

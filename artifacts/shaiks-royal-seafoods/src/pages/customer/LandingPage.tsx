@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useListProducts } from '@workspace/api-client-react';
 import { RoyalStandardSection } from '@/components/RoyalStandardSection';
+import { JourneySection } from '@/components/JourneySection';
 
 export default function LandingPage() {
   const { data: products } = useListProducts();
@@ -179,32 +180,8 @@ export default function LandingPage() {
       {/* ── ROYAL STANDARD — premium interactive section ── */}
       <RoyalStandardSection />
 
-      {/* ── HOW IT WORKS ── */}
-      <section id="how-it-works" className="py-24 bg-card/50 border-b border-border/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">The Journey to Your Table</h2>
-            <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-            <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-px bg-border/50 z-0" />
-            {[
-              { step: '01', title: 'Select Your Catch',    desc: 'Choose from our curated selection of premium frozen seafood, available in 1 KG packs.' },
-              { step: '02', title: 'Choose Delivery Slot', desc: 'Pick a morning (7 AM–11 AM) or afternoon (3 PM–6 PM) slot that suits your schedule.' },
-              { step: '03', title: 'Royal Delivery',       desc: 'Our field executives deliver your order in temperature-controlled bags directly to your door.' },
-            ].map((item, i) => (
-              <div key={i} className="relative z-10 flex flex-col items-center text-center group">
-                <div className="h-24 w-24 rounded-full bg-background border-4 border-card shadow-[0_0_15px_rgba(212,175,55,0.15)] flex items-center justify-center mb-8 relative group-hover:shadow-[0_0_25px_rgba(212,175,55,0.3)] transition-shadow duration-300">
-                  <span className="font-serif text-2xl font-bold text-primary">{item.step}</span>
-                </div>
-                <h3 className="font-serif text-2xl font-semibold mb-4">{item.title}</h3>
-                <p className="text-muted-foreground leading-relaxed max-w-xs">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── HOW IT WORKS — premium journey section ── */}
+      <JourneySection />
 
       {/* ── BULK ORDER CTA ── */}
       <section className="py-20 relative overflow-hidden">
