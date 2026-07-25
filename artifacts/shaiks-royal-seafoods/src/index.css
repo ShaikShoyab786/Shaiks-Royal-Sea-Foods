@@ -188,6 +188,17 @@
   }
 }
 
+/* ── Product card — force gold title & visible badge ─────────────────── */
+.product-card-title {
+  color: #D4AF37 !important;
+  font-family: 'Playfair Display', serif !important;
+}
+.product-card-badge {
+  color: #D4AF37 !important;
+  background: rgba(8, 24, 38, 0.85) !important;
+  border-color: rgba(212, 175, 55, 0.4) !important;
+}
+
 /* ── Royal Standard — luxury shine sweep (every ~9s) ─────────────────── */
 @keyframes luxury-shine {
   0%   { transform: translateX(-200%) skewX(-18deg); opacity: 0; }

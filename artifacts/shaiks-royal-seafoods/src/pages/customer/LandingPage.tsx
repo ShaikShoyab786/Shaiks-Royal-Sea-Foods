@@ -142,7 +142,7 @@ export default function LandingPage() {
                         <Package className="h-12 w-12 text-muted-foreground/20" />
                       </div>
                     )}
-                    <Badge className="absolute top-3 left-3 bg-background/80 backdrop-blur border-border/50 uppercase text-[10px] tracking-wider">
+                    <Badge className="product-card-badge absolute top-3 left-3 backdrop-blur uppercase text-[10px] tracking-wider font-bold">
                       {product.category}
                     </Badge>
                     {/* Hover overlay */}
@@ -155,10 +155,7 @@ export default function LandingPage() {
 
                   {/* Info */}
                   <div className="p-5 flex flex-col flex-1">
-                    <h3
-                      className="font-serif text-xl font-bold mb-1 transition-colors duration-200"
-                      style={{ color: '#D4AF37' }}
-                    >
+                    <h3 className="product-card-title text-xl font-bold mb-1">
                       {product.name}
                     </h3>
                     <p className="text-sm text-muted-foreground mb-4 line-clamp-2 flex-1">{product.description}</p>
