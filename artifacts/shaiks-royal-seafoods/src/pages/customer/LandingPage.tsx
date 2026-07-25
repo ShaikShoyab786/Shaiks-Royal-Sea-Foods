@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { Link } from 'wouter';
-import { ArrowRight, ShieldCheck, Snowflake, Truck, Droplets, Star, Package } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Snowflake, Truck, Droplets, Star, Package, Phone, MessageCircle, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useListProducts } from '@workspace/api-client-react';
@@ -10,6 +10,19 @@ import { JourneySection } from '@/components/JourneySection';
 
 export default function LandingPage() {
   const { data: products } = useListProducts();
+  const ctaRef = useRef<HTMLElement>(null);
+  const [ctaVisible, setCtaVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ctaRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setCtaVisible(true); obs.disconnect(); } },
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -125,12 +138,14 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {products?.filter(p => p.inStock).map(product => (
               <Link key={product.id} href="/products" className="block group">
-                <div className="rounded-2xl border border-border/50 bg-card overflow-hidden hover:border-primary/40 transition-all duration-300 hover:shadow-[0_4px_30px_rgba(212,175,55,0.1)] hover:-translate-y-0.5 flex flex-col cursor-pointer">
-                  {/* Image */}
-                  <div className="relative aspect-[16/10] overflow-hidden bg-secondary/20">
+                <div className="rounded-2xl border border-border/50 bg-card overflow-hidden
+                  hover:border-primary/50 transition-all duration-300
+                  hover:shadow-[0_8px_32px_rgba(212,175,55,0.15)] hover:-translate-y-1 flex flex-col cursor-pointer">
+                  {/* Image — compact aspect ratio */}
+                  <div className="relative aspect-[2/1] overflow-hidden bg-secondary/20">
                     {product.imageUrl ? (
                       <img
                         src={product.imageUrl}
@@ -139,33 +154,32 @@ export default function LandingPage() {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <Package className="h-12 w-12 text-muted-foreground/20" />
+                        <Package className="h-10 w-10 text-muted-foreground/20" />
                       </div>
                     )}
-                    <Badge className="product-card-badge absolute top-3 left-3 backdrop-blur uppercase text-[10px] tracking-wider font-bold">
+                    <Badge className="product-card-badge absolute top-2 left-2 backdrop-blur uppercase text-[9px] tracking-wider font-bold">
                       {product.category}
                     </Badge>
-                    {/* Hover overlay */}
                     <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <span className="bg-primary text-primary-foreground text-xs font-semibold px-4 py-1.5 rounded-full shadow-lg translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                      <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full shadow-lg translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                         Order Now →
                       </span>
                     </div>
                   </div>
 
-                  {/* Info */}
-                  <div className="p-5 flex flex-col flex-1">
-                    <h3 className="product-card-title text-xl font-bold mb-1">
+                  {/* Info — tighter padding */}
+                  <div className="p-3 flex flex-col flex-1">
+                    <h3 className="product-card-title text-base font-bold mb-1 leading-snug">
                       {product.name}
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2 flex-1">{product.description}</p>
+                    <p className="text-xs text-muted-foreground mb-2 line-clamp-2 flex-1 leading-relaxed">{product.description}</p>
 
-                    <div className="flex items-center justify-between pt-4 border-t border-border/40">
+                    <div className="flex items-center justify-between pt-2.5 border-t border-border/40">
                       <div>
-                        <span className="text-2xl font-bold text-primary">₹{product.pricePerKg}</span>
-                        <span className="text-xs text-muted-foreground ml-1">/ kg</span>
+                        <span className="text-lg font-bold text-primary">₹{product.pricePerKg}</span>
+                        <span className="text-[10px] text-muted-foreground ml-1">/ kg</span>
                       </div>
-                      <span className="text-xs text-primary/70 font-medium group-hover:text-primary transition-colors duration-200">
+                      <span className="text-[10px] text-primary/70 font-medium group-hover:text-primary transition-colors duration-200">
                         Click to order →
                       </span>
                     </div>
@@ -183,19 +197,103 @@ export default function LandingPage() {
       {/* ── HOW IT WORKS — premium journey section ── */}
       <JourneySection />
 
-      {/* ── BULK ORDER CTA ── */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-primary/5" />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center p-10 md:p-14 rounded-3xl border border-primary/20 bg-card/80 backdrop-blur-sm shadow-2xl">
-            <h2 className="font-serif text-3xl md:text-5xl font-bold mb-4">Hosting an Event?</h2>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              We supply premium seafood for weddings, banquets, and high-end restaurants across Vijayawada.
+      {/* ── HOSTING AN EVENT CTA ── */}
+      <section ref={ctaRef} className="relative overflow-hidden py-20 md:py-28">
+        {/* Cinematic background */}
+        <img
+          src="/images/event-hero.png"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {/* Left-to-right gradient overlay — keeps text readable, reveals image on right */}
+        <div className="absolute inset-0 bg-gradient-to-r from-background/96 via-background/82 to-background/35 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent pointer-events-none" />
+
+        {/* Animated content */}
+        <div
+          className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 transition-[opacity,transform] duration-700"
+          style={{
+            opacity:   ctaVisible ? 1 : 0,
+            transform: ctaVisible ? 'translateY(0)' : 'translateY(32px)',
+          }}
+        >
+          <div className="max-w-xl">
+            <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 leading-tight">
+              Hosting an Event?
+            </h2>
+
+            {/* Gold divider */}
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-px w-14 bg-gradient-to-r from-primary/80 to-transparent" />
+              <div className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_6px_rgba(212,175,55,0.6)]" />
+            </div>
+
+            <p className="text-muted-foreground mb-4 text-sm font-medium uppercase tracking-widest">
+              Premium seafood catering for:
             </p>
-            <Button size="lg" className="px-8 rounded-full text-lg shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
-              onClick={() => window.open('https://wa.me/919999999999', '_blank')}>
-              Message on WhatsApp
-            </Button>
+
+            {/* Event type badges */}
+            <div className="flex flex-wrap gap-2 mb-7">
+              {[
+                '💍 Weddings',
+                '🎉 Parties',
+                '🏨 Hotels',
+                '🍽️ Restaurants',
+                '🏢 Corporate Events',
+              ].map(ev => (
+                <span
+                  key={ev}
+                  className="text-xs font-semibold text-foreground/90 bg-card/75 backdrop-blur-sm
+                    border border-primary/25 px-3 py-1.5 rounded-full
+                    hover:border-primary/60 hover:bg-card transition-colors duration-200 cursor-default"
+                >
+                  {ev}
+                </span>
+              ))}
+            </div>
+
+            {/* CTA buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 mb-6">
+              <a
+                href="https://wa.me/919908352959"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button
+                  size="lg"
+                  className="w-full sm:w-auto bg-green-600 hover:bg-green-500 text-white rounded-full px-7 gap-2.5
+                    shadow-lg shadow-green-900/30 hover:shadow-green-800/50
+                    hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
+                >
+                  <MessageCircle className="h-5 w-5" />
+                  Order on WhatsApp
+                </Button>
+              </a>
+              <a href="tel:+919908352959">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full sm:w-auto border-primary text-primary hover:bg-primary/10 rounded-full px-7 gap-2.5
+                    shadow-lg shadow-primary/10 hover:shadow-primary/25
+                    hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
+                >
+                  <Phone className="h-5 w-5" />
+                  Call: +91 99083 52959
+                </Button>
+              </a>
+            </div>
+
+            {/* Bulk order note */}
+            <div className="flex items-start gap-3 p-4 bg-card/65 backdrop-blur-sm border border-border/40 rounded-xl max-w-sm">
+              <Info className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+              <div>
+                <p className="text-sm font-semibold text-foreground mb-0.5">Need a bulk order?</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Call us directly for custom pricing, manual bookings and catering requirements.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

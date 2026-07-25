@@ -1,0 +1,108 @@
+Hosting an Event CTA Enhancement
+
+I have uploaded a new premium background image for the Hosting an Event section.
+
+Replace the existing plain CTA card with this uploaded image.
+
+Do NOT change the website's architecture or styling. Only redesign this section while maintaining the premium black and gold branding.
+
+Background
+
+Use the uploaded luxury seafood buffet image as the section background.
+
+Requirements:
+
+Full-width responsive background
+Dark navy/black gradient overlay (40–50%) to ensure text readability
+Slight blur or dark overlay only if necessary
+Keep the premium cinematic feel
+Heading
+
+Hosting an Event?
+
+Large luxury serif font.
+
+White text with subtle gold accents.
+
+Subtitle
+
+Premium seafood catering for:
+
+💍 Weddings
+
+🎉 Parties
+
+🏨 Hotels
+
+🍽️ Restaurants
+
+🏢 Corporate Events
+
+Display these as elegant badges or small icons instead of plain text.
+
+CTA Buttons
+Primary Button
+
+🟢 WhatsApp Icon
+
+Order on WhatsApp
+
+Large green premium button.
+
+Rounded corners.
+
+Smooth hover animation.
+
+On click, open WhatsApp chat.
+
+Secondary Button
+
+📞 Phone Icon
+
+Call Now
+
++91 9908352959
+
+Use a premium outlined gold button.
+
+Clicking should initiate a phone call on supported devices.
+
+Bulk Order Information
+
+Below the buttons, display a premium information card.
+
+Need a bulk order?
+
+Call us directly for pricing, manual bookings and custom catering requirements.
+
+Use a smaller font with an elegant icon.
+
+This should immediately communicate that customers can also place manual orders over the phone.
+
+Hover & Animation
+
+Animate this section when it enters the viewport.
+
+Fade In
+Move Up
+Duration: 700ms
+
+Buttons should have:
+
+Smooth hover glow
+Slight lift animation
+Gold shadow for the phone button
+Soft green glow for the WhatsApp button
+Mobile Optimization
+
+On mobile:
+
+Background should remain visually appealing
+Stack buttons vertically
+Maintain proper spacing
+Keep all text readable
+Overall Goal
+
+This section should feel like a premium catering advertisement rather than a simple contact section.
+
+The customer should instantly understand that Shaik's Royal Sea Foods supplies premium seafood for weddings, parties, hotels, restaurants, and corporate events, and that they can easily order via WhatsApp or call directly for bulk bookings.
