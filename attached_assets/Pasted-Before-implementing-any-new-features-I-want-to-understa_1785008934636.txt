@@ -1,0 +1,278 @@
+Before implementing any new features, I want to understand the current architecture and technology stack of my application so we can make decisions that are scalable and cost-effective for a startup.
+
+Please analyze my entire project and explain:
+
+1. Current Technology Stack
+
+Tell me exactly what technologies are being used.
+
+For example:
+
+Frontend Framework
+Backend Framework
+Database
+ORM
+Authentication
+Maps Provider
+File Storage
+Hosting
+Payment Gateway
+OTP System
+Email Service
+State Management
+Deployment Platform
+
+I want to understand every major component currently used.
+
+2. Authentication
+
+Currently OTP is only a demo.
+
+Explain how authentication is currently implemented.
+
+Is it:
+
+Mock OTP
+Session based
+JWT
+Firebase
+Clerk
+Supabase
+Custom
+
+Then recommend the most affordable and production-ready solution for an Indian startup.
+
+Compare:
+
+MSG91
+Twilio
+Firebase Phone Authentication
+Any better alternatives
+
+Tell me:
+
+Monthly cost
+Ease of integration
+Scalability
+Which one best suits my business
+
+Do not implement anything yet.
+
+I want to decide first.
+
+3. User Registration
+
+Currently I want customer registration to be extremely simple.
+
+During first registration collect only:
+
+First Name
+Last Name
+Mobile Number
+Default Address
+
+Nothing else.
+
+After registration,
+
+save these details permanently.
+
+4. Personalized Experience
+
+After login,
+
+greet customer using first name.
+
+Example:
+
+Good Evening, Shoyab 👋
+
+or
+
+Welcome back, Shoyab.
+
+The experience should feel personal.
+
+5. Saved Address
+
+The address entered during registration should become the customer's default delivery address.
+
+During checkout:
+
+Automatically fill:
+
+Name
+Mobile Number
+Delivery Address
+
+Customer should still be able to:
+
+Edit
+
+Change
+
+Save New Address
+
+if delivering to another location.
+
+6. Location Search
+
+Currently the location search is not working correctly.
+
+Please analyze why.
+
+I want:
+
+Search by address
+Search by landmark
+Search by area
+Search by Google Maps location
+Detect Current Location
+Drag Map Marker
+
+The selected location should update accurately.
+
+Please identify what is missing.
+
+Do not implement until we decide.
+
+7. Delivery Charge Logic
+
+I have changed my delivery pricing.
+
+Old pricing is no longer valid.
+
+New pricing:
+
+0–3 km
+
+Free Delivery
+
+More than 3 km and up to 5 km
+
+₹15
+
+More than 5 km and up to 8 km
+
+₹25
+
+More than 8 km and up to 15 km
+
+₹30
+
+More than 15 km and up to 30 km
+
+₹50
+
+Beyond 30 km
+
+Please recommend the best approach.
+
+Should we:
+
+Reject the order?
+Show "Delivery unavailable"?
+Allow manual approval?
+Charge additional fee?
+
+Give recommendations.
+
+Do not implement yet.
+
+8. Payment Gateway
+
+This is one of the most important discussions.
+
+I want to understand which payment gateway is best for my startup.
+
+Please compare:
+
+Razorpay
+Cashfree
+PhonePe Payment Gateway
+PayU
+Any better alternatives
+
+Compare:
+
+Setup process
+Transaction charges
+Ease of integration
+Settlement time
+Refund handling
+Dashboard
+UPI support
+Cards
+Wallets
+Net Banking
+
+Recommend which one is best for an early-stage Indian seafood delivery startup.
+
+Do not implement until I decide.
+
+9. Overall Architecture Review
+
+After reviewing my entire project,
+
+tell me:
+
+What is already built correctly.
+What should be improved.
+Any security concerns.
+Performance concerns.
+Scalability concerns.
+Anything that may become expensive later.
+
+Give me recommendations before making any code changes.
+
+10. Implementation Plan
+
+Finally,
+
+prepare a step-by-step roadmap.
+
+Example:
+
+Phase 1
+
+Authentication
+
+↓
+
+Phase 2
+
+Customer Profile
+
+↓
+
+Phase 3
+
+Address Management
+
+↓
+
+Phase 4
+
+Location Search
+
+↓
+
+Phase 5
+
+Delivery Charge Calculation
+
+↓
+
+Phase 6
+
+Online Payment
+
+↓
+
+Phase 7
+
+Production Deployment
+
+Do not implement anything yet.
+
+I want to review the recommendations first, then we'll proceed feature by feature.
