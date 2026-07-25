@@ -69,4 +69,68 @@ router.post(
   }
 );
 
+// POST /api/upload/content/:key/:index
+// Saves image with a timestamped filename and updates the site_content DB row.
+router.post(
+  "/upload/content/:key/:index",
+  requireAuth,
+  requireRole("admin"),
+  upload.single("image"),
+  async (req, res): Promise<void> => {
+    if (!req.file) {
+      res.status(400).json({ error: "No file uploaded" });
+      return;
+    }
+
+    const key = req.params.key as string;
+    const indexStr = req.params.index as string;
+    const index = parseInt(indexStr, 10);
+
+    try {
+      // Import lazily to avoid circular deps
+      const { db, siteContentTable } = await import("@workspace/db");
+      const { eq } = await import("drizzle-orm");
+
+      const newUrl = `/images/${req.file.filename}`;
+
+      // Fetch current value and patch the image field
+      const [row] = await db
+        .select()
+        .from(siteContentTable)
+        .where(eq(siteContentTable.key, key))
+        .limit(1);
+
+      if (!row) {
+        // Key not seeded yet — just return the URL
+        res.json({ url: newUrl });
+        return;
+      }
+
+      const parsed = JSON.parse(row.value);
+
+      // Array content (royal_standard, journey_steps)
+      if (Array.isArray(parsed) && parsed[index]) {
+        parsed[index].image = newUrl;
+        await db
+          .update(siteContentTable)
+          .set({ value: JSON.stringify(parsed) })
+          .where(eq(siteContentTable.key, key));
+      }
+      // Object content with backgroundImage (event_cta, products_hero)
+      else if (typeof parsed === "object" && parsed !== null && "backgroundImage" in parsed) {
+        parsed.backgroundImage = newUrl;
+        await db
+          .update(siteContentTable)
+          .set({ value: JSON.stringify(parsed) })
+          .where(eq(siteContentTable.key, key));
+      }
+
+      res.json({ url: newUrl });
+    } catch (err) {
+      console.error("Content image upload error:", err);
+      res.status(500).json({ error: "Failed to update content image" });
+    }
+  }
+);
+
 export default router;

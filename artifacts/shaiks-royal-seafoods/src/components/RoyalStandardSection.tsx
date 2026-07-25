@@ -1,36 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { X } from 'lucide-react';
-
-const QUALITY_CARDS = [
-  {
-    image: '/images/quality-export.png',
-    title: 'Export Quality',
-    desc: 'Sourced from the finest catch and carefully selected to meet premium quality standards.',
-    detail:
-      'Every product in our lineup undergoes rigorous inspection to meet international export standards. We partner with certified processors who maintain HACCP and ISO 22000 compliance, ensuring each batch meets the highest benchmark of quality. Our selection criteria prioritise freshness, size consistency and zero contamination — so what reaches your table is the very finest the sea has to offer.',
-  },
-  {
-    image: '/images/quality-hygiene.png',
-    title: 'Hygienically Cleaned',
-    desc: 'Professionally cleaned in a hygienic environment using safe food handling practices.',
-    detail:
-      'Our processing facility operates under strict food-safety protocols enforced by certified food handlers wearing PPE at all times. Every piece of seafood is meticulously cleaned, deveined and rinsed under potable water to eliminate bacteria and contaminants. We maintain a zero-tolerance policy for cross-contamination, so your family receives seafood that is not just clean — but clinically clean.',
-  },
-  {
-    image: '/images/quality-frozen.png',
-    title: 'Flash Frozen –18°C',
-    desc: 'Instantly frozen at –18°C to lock freshness, taste and nutritional value.',
-    detail:
-      'Using industrial blast-freeze technology, our seafood is frozen within hours of processing — locking in peak freshness, natural flavour and vital nutrients like Omega-3 fatty acids. Unlike slow freezing which damages cell structure, our flash-freeze process preserves texture and taste at the molecular level. The result is seafood that is virtually indistinguishable from fresh-caught when properly prepared.',
-  },
-  {
-    image: '/images/quality-temp.png',
-    title: 'Temperature Controlled',
-    desc: 'Maintained under strict cold-chain conditions from our facility to your doorstep.',
-    detail:
-      'Our cold-chain logistics ensure your order never deviates from the optimal –18°C to –20°C range from the moment it leaves our facility to the moment it arrives at your door. Deliveries are packed in high-density insulated thermocol boxes with ice packs rated to maintain temperature for up to 8 hours. Our field executives are trained to handle each parcel with the same care as a pharmaceutical cold-chain delivery.',
-  },
-];
+import { useGetContent, type QualityCard } from '@workspace/api-client-react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const PARTICLES = [
   { top: '8%',  left: '6%',  w: 320, h: 320, dur: 11, delay: 0 },
@@ -41,6 +12,8 @@ const PARTICLES = [
 ];
 
 export function RoyalStandardSection() {
+  const { data: cards, isLoading } = useGetContent<QualityCard[]>('royal_standard');
+
   const [modalIdx, setModalIdx]       = useState<number | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
@@ -53,6 +26,7 @@ export function RoyalStandardSection() {
 
   // ── Entrance animation (once, staggered) ──────────────────────────────
   useEffect(() => {
+    if (!cards) return;
     const observers: IntersectionObserver[] = [];
     wrapperRefs.current.forEach((el, i) => {
       if (!el) return;
@@ -69,10 +43,11 @@ export function RoyalStandardSection() {
       observers.push(obs);
     });
     return () => observers.forEach(o => o.disconnect());
-  }, []);
+  }, [cards]);
 
   // ── Scroll-active card highlight ──────────────────────────────────────
   useEffect(() => {
+    if (!cards) return;
     const observers: IntersectionObserver[] = [];
     wrapperRefs.current.forEach((el, i) => {
       if (!el) return;
@@ -84,14 +59,14 @@ export function RoyalStandardSection() {
       observers.push(obs);
     });
     return () => observers.forEach(o => o.disconnect());
-  }, []);
+  }, [cards]);
 
   // ── Mouse parallax on image ───────────────────────────────────────────
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>, i: number) => {
     const img = imageRefs.current[i];
     if (!img) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    const dx = ((e.clientX - rect.left) / rect.width  - 0.5) * 10; // ±5 px
+    const dx = ((e.clientX - rect.left) / rect.width  - 0.5) * 10;
     const dy = ((e.clientY - rect.top)  / rect.height - 0.5) * 10;
     img.style.transition = 'none';
     img.style.transform  = `translate(${dx}px, ${dy}px) scale(1.07)`;
@@ -140,7 +115,6 @@ export function RoyalStandardSection() {
             }}
           />
         ))}
-        {/* tiny sparkle dots */}
         {[...Array(6)].map((_, i) => (
           <div
             key={`dot-${i}`}
@@ -169,93 +143,97 @@ export function RoyalStandardSection() {
           </div>
         </div>
 
-        {/* ── Cards grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {QUALITY_CARDS.map((card, i) => (
-            /* Entrance wrapper — handles fade-in + slide-up */
-            <div
-              key={i}
-              ref={el => { wrapperRefs.current[i] = el; }}
-              className="transition-[opacity,transform] duration-700"
-              style={{
-                opacity:   visibleCards.has(i) ? 1 : 0,
-                transform: visibleCards.has(i) ? 'translateY(0) scale(1)' : 'translateY(40px) scale(0.96)',
-                transitionDelay: `${i * 150}ms`,
-              }}
-            >
-              {/* Interactive card */}
-              <div
-                className={[
-                  'quality-card-shine group relative rounded-2xl overflow-hidden cursor-pointer',
-                  'bg-card/70 backdrop-blur-sm',
-                  'border transition-all duration-300',
-                  'hover:-translate-y-2',
-                  activeCard === i
-                    ? 'border-primary shadow-[0_0_28px_rgba(212,175,55,0.35)]'
-                    : 'border-primary/25 shadow-xl hover:border-primary/70 hover:shadow-[0_14px_44px_rgba(212,175,55,0.22)]',
-                ].join(' ')}
-                onClick={() => openModal(i)}
-                onMouseMove={e => handleMouseMove(e, i)}
-                onMouseLeave={() => handleMouseLeave(i)}
-              >
-                {/* Image container */}
-                <div className="relative overflow-hidden aspect-square">
-                  <img
-                    ref={el => { imageRefs.current[i] = el; }}
-                    src={card.image}
-                    alt={card.title}
-                    loading="lazy"
-                    draggable={false}
-                    className="w-full h-full object-cover select-none"
-                    style={{ transform: 'translate(0,0) scale(1.04)', transition: 'transform 0.5s ease' }}
-                    onClick={e => { e.stopPropagation(); openLightbox(card.image); }}
-                  />
-
-                  {/* Dark gradient on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent
-                    opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
-                  {/* View hint */}
-                  <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100
-                    translate-y-1 group-hover:translate-y-0 transition-all duration-300 pointer-events-none">
-                    <span className="text-[10px] font-semibold text-primary bg-background/70 backdrop-blur-sm
-                      px-2.5 py-1 rounded-full border border-primary/30">
-                      🔍 Full View
-                    </span>
-                  </div>
+        {/* ── Loading skeleton ── */}
+        {isLoading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[0, 1, 2, 3].map(i => (
+              <div key={i} className="rounded-2xl border border-primary/15 overflow-hidden bg-card/70">
+                <Skeleton className="aspect-square w-full" />
+                <div className="p-5 space-y-2">
+                  <Skeleton className="h-5 w-3/4" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-2/3" />
                 </div>
+              </div>
+            ))}
+          </div>
+        )}
 
-                {/* Text */}
-                <div className="p-5">
-                  <h3 className="font-serif text-lg font-bold text-primary mb-2 leading-snug">
-                    {card.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
-                  <div className="flex items-center gap-1.5 mt-4 text-xs text-primary/60 font-semibold uppercase tracking-wide">
-                    <span>Learn more</span>
-                    <span className="group-hover:translate-x-1 transition-transform duration-200 inline-block">→</span>
+        {/* ── Cards grid ── */}
+        {cards && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {cards.map((card, i) => (
+              <div
+                key={i}
+                ref={el => { wrapperRefs.current[i] = el; }}
+                className="transition-[opacity,transform] duration-700"
+                style={{
+                  opacity:   visibleCards.has(i) ? 1 : 0,
+                  transform: visibleCards.has(i) ? 'translateY(0) scale(1)' : 'translateY(40px) scale(0.96)',
+                  transitionDelay: `${i * 150}ms`,
+                }}
+              >
+                <div
+                  className={[
+                    'quality-card-shine group relative rounded-2xl overflow-hidden cursor-pointer',
+                    'bg-card/70 backdrop-blur-sm',
+                    'border transition-all duration-300',
+                    'hover:-translate-y-2',
+                    activeCard === i
+                      ? 'border-primary shadow-[0_0_28px_rgba(212,175,55,0.35)]'
+                      : 'border-primary/25 shadow-xl hover:border-primary/70 hover:shadow-[0_14px_44px_rgba(212,175,55,0.22)]',
+                  ].join(' ')}
+                  onClick={() => openModal(i)}
+                  onMouseMove={e => handleMouseMove(e, i)}
+                  onMouseLeave={() => handleMouseLeave(i)}
+                >
+                  <div className="relative overflow-hidden aspect-square">
+                    <img
+                      ref={el => { imageRefs.current[i] = el; }}
+                      src={card.image}
+                      alt={card.title}
+                      loading="lazy"
+                      draggable={false}
+                      className="w-full h-full object-cover select-none"
+                      style={{ transform: 'translate(0,0) scale(1.04)', transition: 'transform 0.5s ease' }}
+                      onClick={e => { e.stopPropagation(); openLightbox(card.image); }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent
+                      opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100
+                      translate-y-1 group-hover:translate-y-0 transition-all duration-300 pointer-events-none">
+                      <span className="text-[10px] font-semibold text-primary bg-background/70 backdrop-blur-sm
+                        px-2.5 py-1 rounded-full border border-primary/30">
+                        🔍 Full View
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-5">
+                    <h3 className="font-serif text-lg font-bold text-primary mb-2 leading-snug">
+                      {card.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
+                    <div className="flex items-center gap-1.5 mt-4 text-xs text-primary/60 font-semibold uppercase tracking-wide">
+                      <span>Learn more</span>
+                      <span className="group-hover:translate-x-1 transition-transform duration-200 inline-block">→</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* ── Modal ── */}
-      {modalIdx !== null && (
+      {modalIdx !== null && cards && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{
-            transition: 'opacity 0.3s ease',
-            opacity: modalVisible ? 1 : 0,
-          }}
+          style={{ transition: 'opacity 0.3s ease', opacity: modalVisible ? 1 : 0 }}
           onClick={closeModal}
         >
-          {/* Blurred backdrop */}
           <div className="absolute inset-0 bg-background/78 backdrop-blur-md" />
-
-          {/* Modal panel — fade + scale */}
           <div
             className="relative z-10 w-full max-w-2xl bg-card border border-primary/30 rounded-2xl
               shadow-[0_24px_80px_rgba(0,0,0,0.6)] overflow-hidden"
@@ -266,23 +244,14 @@ export function RoyalStandardSection() {
             }}
             onClick={e => e.stopPropagation()}
           >
-            {/* HD image */}
             <div className="aspect-video overflow-hidden relative">
-              <img
-                src={QUALITY_CARDS[modalIdx].image}
-                alt={QUALITY_CARDS[modalIdx].title}
-                className="w-full h-full object-cover"
-              />
+              <img src={cards[modalIdx].image} alt={cards[modalIdx].title} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-card/60 to-transparent pointer-events-none" />
             </div>
-
-            {/* Content */}
             <div className="p-8">
               <h2 className="font-serif text-3xl font-bold text-foreground mb-5 leading-tight">
-                {QUALITY_CARDS[modalIdx].title}
+                {cards[modalIdx].title}
               </h2>
-
-              {/* Golden divider */}
               <div className="flex items-center gap-3 mb-6">
                 <div className="h-px flex-1 bg-gradient-to-r from-primary/70 to-transparent" />
                 <div className="h-1 w-1 rounded-full bg-primary" />
@@ -290,13 +259,10 @@ export function RoyalStandardSection() {
                 <div className="h-1 w-1 rounded-full bg-primary" />
                 <div className="h-px flex-1 bg-gradient-to-l from-primary/70 to-transparent" />
               </div>
-
               <p className="text-muted-foreground leading-relaxed text-base">
-                {QUALITY_CARDS[modalIdx].detail}
+                {cards[modalIdx].detail}
               </p>
             </div>
-
-            {/* Close button */}
             <button
               onClick={closeModal}
               className="absolute top-4 right-4 h-10 w-10 flex items-center justify-center rounded-full
@@ -315,23 +281,13 @@ export function RoyalStandardSection() {
       {lightboxSrc && (
         <div
           className="fixed inset-0 z-[60] flex items-center justify-center cursor-zoom-out"
-          style={{
-            background: 'rgba(0,0,0,0.93)',
-            transition: 'opacity 0.3s ease',
-            opacity: lightboxIn ? 1 : 0,
-          }}
+          style={{ background: 'rgba(0,0,0,0.93)', transition: 'opacity 0.3s ease', opacity: lightboxIn ? 1 : 0 }}
           onClick={closeLightbox}
         >
           <img
-            src={lightboxSrc}
-            alt="Quality — full view"
-            draggable={false}
+            src={lightboxSrc} alt="Quality — full view" draggable={false}
             className="max-w-[92vw] max-h-[92vh] object-contain rounded-xl shadow-2xl select-none"
-            style={{
-              transition: 'transform 0.35s ease, opacity 0.3s ease',
-              transform: lightboxIn ? 'scale(1)' : 'scale(0.88)',
-              opacity:   lightboxIn ? 1 : 0,
-            }}
+            style={{ transition: 'transform 0.35s ease, opacity 0.3s ease', transform: lightboxIn ? 'scale(1)' : 'scale(0.88)', opacity: lightboxIn ? 1 : 0 }}
             onClick={e => e.stopPropagation()}
           />
           <button

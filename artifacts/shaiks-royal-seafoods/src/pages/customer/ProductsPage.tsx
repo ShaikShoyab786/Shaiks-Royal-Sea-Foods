@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Navbar } from '@/components/Navbar';
-import { useListProducts } from '@workspace/api-client-react';
+import { useListProducts, useGetContent, type ProductsHero } from '@workspace/api-client-react';
 import { useCartStore } from '@/store/useCartStore';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
@@ -14,6 +14,7 @@ export default function ProductsPage() {
   const { data: products, isLoading } = useListProducts();
   const { items, addItem, removeItem, updateQuantity } = useCartStore();
 
+  const { data: productsHero } = useGetContent<ProductsHero>('products_hero');
   const [heroIn, setHeroIn] = useState(false);
   const heroImgRef = useRef<HTMLImageElement>(null);
 
@@ -61,7 +62,7 @@ export default function ProductsPage() {
         {/* Parallax image */}
         <img
           ref={heroImgRef}
-          src="/images/products-hero.png"
+          src={productsHero?.backgroundImage || '/images/products-hero.png'}
           alt="Premium seafood selection"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ transform: 'scale(1.12) translateY(0px)' }}

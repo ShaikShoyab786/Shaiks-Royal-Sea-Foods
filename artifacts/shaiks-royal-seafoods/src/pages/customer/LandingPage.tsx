@@ -4,12 +4,13 @@ import { Link } from 'wouter';
 import { ArrowRight, ShieldCheck, Snowflake, Truck, Droplets, Star, Package, Phone, MessageCircle, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { useListProducts } from '@workspace/api-client-react';
+import { useListProducts, useGetContent, type EventCta } from '@workspace/api-client-react';
 import { RoyalStandardSection } from '@/components/RoyalStandardSection';
 import { JourneySection } from '@/components/JourneySection';
 
 export default function LandingPage() {
   const { data: products } = useListProducts();
+  const { data: eventCta } = useGetContent<EventCta>('event_cta');
   const ctaRef = useRef<HTMLElement>(null);
   const [ctaVisible, setCtaVisible] = useState(false);
 
@@ -201,7 +202,7 @@ export default function LandingPage() {
       <section ref={ctaRef} className="relative overflow-hidden py-20 md:py-28">
         {/* Cinematic background */}
         <img
-          src="/images/event-hero.png"
+          src={eventCta?.backgroundImage || '/images/event-hero.png'}
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-cover"
@@ -256,7 +257,7 @@ export default function LandingPage() {
             {/* CTA buttons */}
             <div className="flex flex-col sm:flex-row gap-3 mb-6">
               <a
-                href="https://wa.me/919908352959"
+                href={`https://wa.me/${eventCta?.phone || '919908352959'}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -270,7 +271,7 @@ export default function LandingPage() {
                   Order on WhatsApp
                 </Button>
               </a>
-              <a href="tel:+919908352959">
+              <a href={`tel:+${eventCta?.phone || '919908352959'}`}>
                 <Button
                   size="lg"
                   variant="outline"
@@ -279,7 +280,7 @@ export default function LandingPage() {
                     hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
                 >
                   <Phone className="h-5 w-5" />
-                  Call: +91 99083 52959
+                  Call: +{eventCta?.phone ? eventCta.phone.replace(/(\d{2})(\d{5})(\d{5})/, '$1 $2 $3') : '91 99083 52959'}
                 </Button>
               </a>
             </div>
